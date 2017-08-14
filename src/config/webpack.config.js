@@ -26,7 +26,7 @@ module.exports = (env) => {
   // Plugins
   const plugins = [];
   if (env.production) {
-    plugins.push(new ExtractTextPlugin('[name].min.css'));
+    plugins.push(new ExtractTextPlugin('css/[name].min.css'));
   }
 
   if (env.dev) {
@@ -34,14 +34,16 @@ module.exports = (env) => {
   }
 
   return {
+    context: path.resolve(__dirname, '../../'),
+
     entry: {
-      global : './client/js/global.js',
-      styleguide: './client/sass/styleguide.scss',
+      main: './src/js/index.js',
+      styleguide: './src/sass/styleguide.scss',
     },
 
     output: {
-      filename: '[name].min.js',
-      path: path.resolve(__dirname, '../../static'),
+      filename: 'js/[name].min.js',
+      path: path.resolve(__dirname, '../../build'),
     },
 
     module: {
@@ -70,7 +72,7 @@ module.exports = (env) => {
       hot: true,
       quiet: false,
       noInfo: false,
-      contentBase: '/static/',
+      contentBase: '/build/',
       headers: { 'Access-Control-Allow-Origin': '*' },
       stats: { colors: true },
     },
