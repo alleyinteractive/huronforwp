@@ -12,7 +12,7 @@ path = require('path');
  */
 module.exports = {
   css: [],
-  entry: 'global',
+  entry: 'main',
   js: [],
   kss: 'src/sass',
   kssExtension: '.scss',
