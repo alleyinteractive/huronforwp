@@ -1,2 +1,13 @@
-node_modules/
-npm-debug.log
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+.env*
+
+npm-debug.log*
