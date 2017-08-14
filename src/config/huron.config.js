@@ -12,9 +12,9 @@ path = require('path');
  */
 module.exports = {
   css: [],
-  entry: 'global',
+  entry: 'main',
   js: [],
-  kss: 'client/sass',
+  kss: 'src/sass',
   kssExtension: '.scss',
   kssOptions: {
     multiline: true,
@@ -27,11 +27,10 @@ module.exports = {
     'sample',
     {
       title: 'styleguide',
-      css: ['static/styleguide.min.css'],
+      css: ['build/css/styleguide.min.css'],
     },
   ],
-  root: 'static/prototype',
-  sectionTemplate: path.join(__dirname, '../../node_modules/huron/templates/section.hbs'),
+  root: 'build/prototype',
   templates: {
     rule: {
       test: /\.(hbs|handlebars)$/,

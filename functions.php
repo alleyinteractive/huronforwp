@@ -1,45 +1,33 @@
 <?php
 /**
- * _s functions and definitions
+ * huronforwp functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package _s
+ * @package huronforwp
  */
-
-function _s_get_asset_enqueues( $asset_name, $asset_extension ) {
-	$is_hot = (!empty( $_GET['dev'] ));
-
-	if ( 'css' === $asset_extension && $is_hot ) {
-		// Do not include CSS assets when hot reloading, as they are part of the
-		// js bundle.
-		return;
-	}
-
-	$uri = $is_hot ? '//localhost:8080' : get_template_directory_uri() . '/static';
-
-	$enqueue_function = ( 'css' === $asset_extension ) ?
-		'wp_enqueue_style' : 'wp_enqueue_script';
-
-	return $enqueue_function(
-			"_s-{$asset_name}-{$asset_extension}",
-			"{$uri}/{$asset_name}.min.{$asset_extension}",
-			array(),
-			'1.0'
-		);
-}
 
 /**
  * Enqueue scripts and styles.
  */
-function _s_scripts() {
-	$assets = [
-		'css' => 'global',
-		'js' => 'global',
-	];
-
-	foreach( $assets as $asset_extension => $asset_name ) {
-		_s_get_asset_enqueues( $asset_name, $asset_extension );
+function huronforwp_assets() {
+	if ( true == get_query_var( 'dev', false ) ) {
+		wp_enqueue_script( 'develop-js', '//localhost:8080/build/main.js', array(), '1.0' );
+	} else {
+		wp_enqueue_script( 'main-js', get_template_directory_uri() . '/build/js/main.min.js', array(), '1.0' );
+		wp_enqueue_style( 'main-css', get_template_directory_uri() . '/build/css/main.min.css', array(), '1.0' );
 	}
 }
-add_action( 'wp_enqueue_scripts', '_s_scripts' );
+add_action( 'wp_enqueue_scripts', 'huronforwp_assets' );
+
+/**
+ * Add custom query vars.
+ *
+ * @param array $vars Array of current query vars.
+ * @return array $vars Array of query vars.
+ */
+add_filter( 'query_vars', function( $vars ) {
+	// Add a query var to enable hot reloading
+	$vars[] = 'dev';
+	return $vars;
+} );
