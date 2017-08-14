@@ -4,7 +4,7 @@
   "description": "An example of a WordPress theme that uses Huron for prototying.",
   "main": "index.js",
   "engines": {
-    "node": "7",
+    "node": "6",
     "npm": "5"
   },
   "scripts": {
