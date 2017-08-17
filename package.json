@@ -7,12 +7,7 @@
     "node": "6",
     "npm": "5"
   },
-  "scripts": {
-    "build": "webpack --config src/config/webpack.config.js -p --env.production",
-    "dev": "webpack-dev-server --config src/config/webpack.config.js --env.dev",
-    "huron": "huron -w src/config/webpack.config.js -c src/config/huron.config.js --env.huron",
-    "huron-build": "huron -w src/config/webpack.config.js -c src/config/huron.config.js -p --env.huron"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pattiereaves/huronforwp.git"
